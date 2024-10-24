@@ -1,3 +1,7 @@
+* {
+  direction: rtl;
+}
+
 .App {
   text-align: center;
 }
@@ -35,4 +39,78 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fafafa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.profile-container {
+  background-color: #fff;
+  border: 1px solid #dbdbdb;
+  border-radius: 3px;
+  padding: 20px;
+  width: 300px;
+  text-align: center;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile-picture {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.profile-info {
+  text-align: left;
+}
+
+.username {
+  font-size: 18px;
+  margin: 0 0 5px;
+}
+
+.bio {
+  font-size: 14px;
+  color: #8e8e8e;
+  margin: 0 0 10px;
+}
+
+.instagram-link a {
+  color: #0095f6;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.profile-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-number {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: #8e8e8e;
 }
